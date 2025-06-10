@@ -64,6 +64,10 @@ class InternVLChatModel(PreTrainedModel):
         config.vision_config.use_flash_attn = True if use_flash_attn else False
         config.llm_config.attn_implementation = 'flash_attention_2' if use_flash_attn else 'eager'
 
+        print("\n--- DEBUG: Cấu hình LLM trước khi khởi tạo mô hình ---")
+        print(config.llm_config)
+        print("----------------------------------------------------\n")
+
         logger.info(f'num_image_token: {self.num_image_token}')
         logger.info(f'ps_version: {self.ps_version}')
         if vision_model is not None:
@@ -83,6 +87,12 @@ class InternVLChatModel(PreTrainedModel):
                 self.language_model = Qwen2ForCausalLM(config.llm_config)
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
+        if hasattr(self, 'language_model') and self.language_model is not None:
+        print("\n--- DEBUG: Cấu hình của mô hình LLM sau khi khởi tạo ---")
+        print(self.language_model.config)
+        print(f"Giá trị attn_implementation trong cấu hình mô hình: {getattr(self.language_model.config, 'attn_implementation', 'Không tìm thấy')}")
+        print("----------------------------------------------------------\n")
+    # --- Kết thúc chèn code ---
 
         vit_hidden_size = config.vision_config.hidden_size
         llm_hidden_size = config.llm_config.hidden_size
