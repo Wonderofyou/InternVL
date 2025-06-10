@@ -119,8 +119,9 @@ class InternVLChatModel(PreTrainedModel):
                 }
                 
                 # Tạo config object
-                config = Qwen2Config.from_dict(config_dict)
-                self.language_model = Qwen2ForCausalLM(config)
+                config_qwen = Qwen2Config.from_dict(config_dict)
+                print(f"[DEBUG]{config_qwen == config.llm_config})
+                self.language_model = Qwen2ForCausalLM(config_qwen)
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
         if hasattr(self, 'language_model') and self.language_model is not None:
