@@ -59,7 +59,8 @@ class InternVLChatModel(PreTrainedModel):
         self.ps_version = config.ps_version
         self.llm_arch_name = config.llm_config.architectures[0]
         # Enable Flash Attention if supported, otherwise fall back to eager attention.
-        use_flash_attn = use_flash_attn if has_flash_attn else False
+        #use_flash_attn = use_flash_attn if has_flash_attn else False
+        use_flash_attn = False
         config.vision_config.use_flash_attn = True if use_flash_attn else False
         config.llm_config.attn_implementation = 'flash_attention_2' if use_flash_attn else 'eager'
 
