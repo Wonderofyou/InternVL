@@ -84,7 +84,43 @@ class InternVLChatModel(PreTrainedModel):
             elif config.llm_config.architectures[0] == 'Phi3ForCausalLM':
                 self.language_model = Phi3ForCausalLM(config.llm_config)
             elif config.llm_config.architectures[0] == 'Qwen2ForCausalLM':
-                self.language_model = Qwen2ForCausalLM(config.llm_config)
+                from transformers import AutoModel, Qwen2ForCausalLM, Qwen2Config
+
+                # Tạo config từ dict
+                config_dict = {
+                  "_name_or_path": "Qwen/Qwen2-0.5B-Instruct",
+                  "architectures": [
+                    "Qwen2ForCausalLM"
+                  ],
+                  "attention_dropout": 0.0,
+                  "attn_implementation": "eager",
+                  "bos_token_id": 151643,
+                  "eos_token_id": 151645,
+                  "hidden_act": "silu",
+                  "hidden_size": 896,
+                  "initializer_range": 0.02,
+                  "intermediate_size": 4864,
+                  "max_position_embeddings": 32768,
+                  "max_window_layers": 24,
+                  "model_type": "qwen2",
+                  "num_attention_heads": 14,
+                  "num_hidden_layers": 24,
+                  "num_key_value_heads": 2,
+                  "rms_norm_eps": 1e-06,
+                  "rope_theta": 1000000.0,
+                  "sliding_window": 32768,
+                  "tie_word_embeddings": False,
+                  "torch_dtype": "bfloat16",
+                  "transformers_version": "4.37.2",
+                  "use_bfloat16": True,
+                  "use_cache": True,
+                  "use_sliding_window": False,
+                  "vocab_size": 151655
+                }
+                
+                # Tạo config object
+                config = Qwen2Config.from_dict(config_dict)
+                self.language_model = Qwen2ForCausalLM(config)
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
         if hasattr(self, 'language_model') and self.language_model is not None:
