@@ -179,10 +179,17 @@ class InternAttention(nn.Module):
 
     def __init__(self, config: InternVisionConfig):
         super().__init__()
+        print("-------------------")
+        print(f"[DEBUG] {config}") 
+        print("-------------------")
         self.config = config
         self.embed_dim = config.hidden_size
         self.num_heads = config.num_attention_heads
         self.use_flash_attn = config.use_flash_attn and has_flash_attn
+        print("-------------------")
+        print(f"[DEBUG] {self.use_flash_attn}")
+        print(f"[DEBUG] {has_flash_attn}") 
+        print("-------------------")
         if config.use_flash_attn and not has_flash_attn:
             print('Warning: Flash Attention is not available, use_flash_attn is set to False.')
         self.head_dim = self.embed_dim // self.num_heads
