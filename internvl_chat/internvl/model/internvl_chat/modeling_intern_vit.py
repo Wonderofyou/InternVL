@@ -185,7 +185,8 @@ class InternAttention(nn.Module):
         self.config = config
         self.embed_dim = config.hidden_size
         self.num_heads = config.num_attention_heads
-        self.use_flash_attn = config.use_flash_attn and has_flash_attn
+        #self.use_flash_attn = config.use_flash_attn and has_flash_attn
+        self.use_flash_attn = False
         print("-------------------")
         print(f"[DEBUG] {self.use_flash_attn}")
         print(f"[DEBUG] {has_flash_attn}") 
