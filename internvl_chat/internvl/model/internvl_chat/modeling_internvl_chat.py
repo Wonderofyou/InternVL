@@ -88,10 +88,10 @@ class InternVLChatModel(PreTrainedModel):
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
         if hasattr(self, 'language_model') and self.language_model is not None:
-        print("\n--- DEBUG: Cấu hình của mô hình LLM sau khi khởi tạo ---")
-        print(self.language_model.config)
-        print(f"Giá trị attn_implementation trong cấu hình mô hình: {getattr(self.language_model.config, 'attn_implementation', 'Không tìm thấy')}")
-        print("----------------------------------------------------------\n")
+          print("\n--- DEBUG: Cấu hình của mô hình LLM sau khi khởi tạo ---")
+          print(self.language_model.config)
+          print(f"Giá trị attn_implementation trong cấu hình mô hình: {getattr(self.language_model.config, 'attn_implementation', 'Không tìm thấy')}")
+          print("----------------------------------------------------------\n")
     # --- Kết thúc chèn code ---
 
         vit_hidden_size = config.vision_config.hidden_size
