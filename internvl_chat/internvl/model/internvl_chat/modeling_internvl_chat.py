@@ -109,7 +109,7 @@ class InternVLChatModel(PreTrainedModel):
                   "rms_norm_eps": 1e-06,
                   "rope_theta": 1000000.0,
                   "sliding_window": 32768,
-                  "tie_word_embeddings": False,
+                  "tie_word_embeddings": True,
                   "torch_dtype": "bfloat16",
                   "transformers_version": "4.37.2",
                   "use_bfloat16": True,
