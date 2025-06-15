@@ -108,12 +108,12 @@ class InternVLChatModel(PreTrainedModel):
                   "rms_norm_eps": 1e-06,
                   "rope_theta": 1000000.0,
                   "sliding_window": 32768,
-                  "tie_word_embeddings": false,
+                  "tie_word_embeddings": False,
                   "torch_dtype": "bfloat16",
                   "transformers_version": "4.37.2",
-                  "use_bfloat16": true,
-                  "use_cache": true,
-                  "use_sliding_window": false,
+                  "use_bfloat16": True,
+                  "use_cache": True,
+                  "use_sliding_window": False,
                   "vocab_size": 151674
                 }
                 
