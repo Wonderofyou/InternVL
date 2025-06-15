@@ -128,7 +128,8 @@ class InternVLChatModel(PreTrainedModel):
                 print(config.llm_config)
                 print("--------------------------------------------")
                 
-                self.language_model = Qwen2ForCausalLM(config_qwen)
+                self.language_model =  Qwen2ForCausalLM(config.llm_config)
+
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
         if hasattr(self, 'language_model') and self.language_model is not None:
