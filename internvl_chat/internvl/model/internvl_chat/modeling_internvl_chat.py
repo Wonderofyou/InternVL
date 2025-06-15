@@ -85,37 +85,36 @@ class InternVLChatModel(PreTrainedModel):
                 self.language_model = Phi3ForCausalLM(config.llm_config)
             elif config.llm_config.architectures[0] == 'Qwen2ForCausalLM':
                 from transformers import AutoModel, Qwen2ForCausalLM, Qwen2Config
-
+                
                 # Tạo config từ dict
                 config_dict = {
-                  "_name_or_path": "Qwen/Qwen2-0.5B-Instruct",
+                  "_name_or_path": "Qwen/Qwen2.5-3B-Instruct",
                   "architectures": [
                     "Qwen2ForCausalLM"
                   ],
                   "attention_dropout": 0.0,
-                  "attn_implementation": "eager",
                   "bos_token_id": 151643,
                   "eos_token_id": 151645,
                   "hidden_act": "silu",
-                  "hidden_size": 896,
+                  "hidden_size": 2048,
                   "initializer_range": 0.02,
-                  "intermediate_size": 4864,
+                  "intermediate_size": 11008,
                   "max_position_embeddings": 32768,
-                  "max_window_layers": 24,
+                  "max_window_layers": 70,
                   "model_type": "qwen2",
-                  "num_attention_heads": 14,
-                  "num_hidden_layers": 24,
+                  "num_attention_heads": 16,
+                  "num_hidden_layers": 36,
                   "num_key_value_heads": 2,
                   "rms_norm_eps": 1e-06,
                   "rope_theta": 1000000.0,
                   "sliding_window": 32768,
-                  "tie_word_embeddings": True,
+                  "tie_word_embeddings": false,
                   "torch_dtype": "bfloat16",
                   "transformers_version": "4.37.2",
-                  "use_bfloat16": True,
-                  "use_cache": True,
-                  "use_sliding_window": False,
-                  "vocab_size": 151655
+                  "use_bfloat16": true,
+                  "use_cache": true,
+                  "use_sliding_window": false,
+                  "vocab_size": 151674
                 }
                 
                 # Tạo config object
@@ -128,7 +127,7 @@ class InternVLChatModel(PreTrainedModel):
                 print(config.llm_config)
                 print("--------------------------------------------")
                 
-                self.language_model =  Qwen2ForCausalLM(config.llm_config)
+                self.language_model =  Qwen2ForCausalLM(config_qwen)
 
             else:
                 raise NotImplementedError(f'{config.llm_config.architectures[0]} is not implemented.')
